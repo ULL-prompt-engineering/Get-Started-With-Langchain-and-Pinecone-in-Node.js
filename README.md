@@ -49,6 +49,54 @@ Creating a collection from your index is useful when performing tasks like the f
 
 **Adjusting the vector dimension can impact the accuracy and performance of the search, so it's important to choose an adequate dimension based on your specific use case and data.**
 
+In the example [0-main.js](0-main.js) we have:
+
+```js
+const vectorDimension = 1536;
+```
+
+and in [1-createPineconeindex.js](1-createPineconeindex.js) we have:
+
+```js
+// 5. Create index
+    const createClient = await client.createIndex({
+      createRequest: {
+        name: indexName,
+        dimension: vectorDimension,
+        metric: "cosine",
+      },
+    });
+```
+
+The presenter says:
+
+> Since we're using the OpenAI embeddings endpoint, this is the criteria that's returned from the embeddings endpoint. If you are using a different embeddings endpoint, you'll need to set up the proper vector dimension accordingly.
+
+
+OpenAI’s text embeddings measure the relatedness of text strings. **Embeddings** are commonly used for:
+
+- Search (where results are ranked by relevance to a query string)
+- Clustering (where text strings are grouped by similarity)
+- Recommendations (where items with related text strings are recommended)
+- Anomaly detection (where outliers with little relatedness are identified)
+- Diversity measurement (where similarity distributions are analyzed)
+- Classification (where text strings are classified by their most similar label)
+
+An embedding is a vector (list) of floating point numbers. The distance between two vectors measures their relatedness. Small distances suggest high relatedness and large distances suggest low relatedness.
+
+If you go to [Embeddings reference guide](https://platform.openai.com/docs/guides/embeddings/embedding-models) you can see their recommendations.
+
+<table>
+<thead>
+<tr>
+<th>Model name</th><th>tokenizer</th><th>max input tokens</th><th>output dimensions</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>text-embedding-ada-002</td><td>cl100k_base</td><td>8191</td><td>1536</td></tr>
+</tbody>
+</table>
+
 See section [Choosing index type and size](https://docs.pinecone.io/docs/choosing-index-type-and-size) of  the Pinecone docs.
 
 There are five main considerations when deciding how to configure your Pinecone index:
@@ -65,52 +113,14 @@ The most important consideration in sizing is the number of vectors you plan on 
 
 ### Dimensionality of vectors
 
+By specifying the vector dimension when creating the PineconeStore object, you can control the dimensionality of the vectors used for similarity search. 
+
 The rules of thumb above assumes a typical configuration of 768 [dimensions per vector](https://docs.pinecone.io/docs/manage-indexes/#creating-an-index). As your individual use case will dictate the dimensionality of your vectors, the amount of space required to store them may necessarily be larger or smaller.
 
 Each dimension on a single vector consumes 4 bytes of memory and storage per dimension, so if you expect to have 1M vectors with 768 dimensions each, that’s about 3GB of storage without factoring in metadata or other overhead. 
 
 Using that reference, we can estimate the typical pod size and number needed for a given index. This [Table](https://docs.pinecone.io/docs/choosing-index-type-and-size#dimensionality-of-vectors)  gives some examples of this.
 
-### Example
 
-Import the necessary libraries and initialize the Pinecone client:
-
-```js
-import { PineconeClient } from "@pinecone-database/pinecone";
-import * as dotenv from "dotenv";
-
-dotenv.config();
-
-const client = new PineconeClient();
-await client.init({
-  apiKey: process.env.PINECONE_API_KEY,
-  environment: process.env.PINECONE_ENVIRONMENT,
-});
-const pineconeIndex = client.Index(process.env.PINECONE_INDEX);
-Create a PineconeStore object with the desired vector dimension:
-const vectorDimension = 128; // Replace with your desired vector dimension
-const pineconeStore = new PineconeStore(vectorDimension, { pineconeIndex });
-```
-
-Add your documents to the PineconeStore:
-
-```js
-const docs = [
-  new Document({
-    metadata: { foo: "bar" },
-    pageContent: "pinecone is a vector db",
-  }),
-  // Add more documents as needed
-];
-
-await pineconeStore.addDocuments(docs);
-Compute the similarity search using the desired vector dimension:
-const query = "pinecone"; // Replace with your query
-const k = 10; // Replace with the number of nearest neighbors you want to retrieve
-
-const results = await pineconeStore.similaritySearch(query, k);
-console.log(results);
-```
-By specifying the vector dimension when creating the PineconeStore object, you can control the dimensionality of the vectors used for similarity search. 
 
 
