@@ -1,3 +1,12 @@
+- [Get-Started-With-Langchain-and-Pinecone-in-Node.js](#get-started-with-langchain-and-pinecone-in-nodejs)
+  - [Versions](#versions)
+  - [File Loaders](#file-loaders)
+  - [Understanding indexes](#understanding-indexes)
+  - [Understanding collections](#understanding-collections)
+  - [Computing the vector dimension](#computing-the-vector-dimension)
+    - [Number of vectors](#number-of-vectors)
+    - [Dimensionality of vectors](#dimensionality-of-vectors)
+
 # Get-Started-With-Langchain-and-Pinecone-in-Node.js
 
 From Developers Digest youtube tutorial: https://youtu.be/CF5buEVrYwo
