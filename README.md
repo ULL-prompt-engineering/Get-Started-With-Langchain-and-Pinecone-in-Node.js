@@ -1,6 +1,8 @@
 # Get-Started-With-Langchain-and-Pinecone-in-Node.js
 
-From my youtube tutorial: https://youtu.be/CF5buEVrYwo
+From Developers Digest youtube tutorial: https://youtu.be/CF5buEVrYwo
+
+This crash course will guide us through the basics of programming with Langchain and Pinecone.
 
 ## Versions
 
@@ -54,8 +56,8 @@ There are five main considerations when deciding how to configure your Pinecone 
 - Number of vectors
 - Dimensionality of your vectors
 - Size of metadata on each vector
-- Queries per second (QPS) throughput
-- Cardinality of indexed metadata
+- [Queries per second (QPS) throughput](https://docs.pinecone.io/docs/choosing-index-type-and-size#queries-per-second-qps)
+- [Cardinality of indexed metadata](https://docs.pinecone.io/docs/choosing-index-type-and-size#metadata-cardinality-and-size)
 
 ### Number of vectors
 
