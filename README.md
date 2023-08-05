@@ -6,6 +6,8 @@
   - [Computing the vector dimension](#computing-the-vector-dimension)
     - [Number of vectors](#number-of-vectors)
     - [Dimensionality of vectors](#dimensionality-of-vectors)
+  - [Execution](#execution)
+  - [Pinecone Indexes Dashboard](#pinecone-indexes-dashboard)
 
 # Get-Started-With-Langchain-and-Pinecone-in-Node.js
 
@@ -131,5 +133,43 @@ Each dimension on a single vector consumes 4 bytes of memory and storage per dim
 Using that reference, we can estimate the typical pod size and number needed for a given index. This [Table](https://docs.pinecone.io/docs/choosing-index-type-and-size#dimensionality-of-vectors)  gives some examples of this.
 
 
+## Execution
 
+➜  Get-Started-With-Langchain-and-Pinecone-in-Node.js git:(casiano) node 0-main.js
+Checking "your-pinecone-index-name"...
+"your-pinecone-index-name" already exists.
+Retrieving Pinecone index...
+Pinecone index retrieved: your-pinecone-index-name
+Processing document: /Users/casianorodriguezleon/campus-virtual/2223/learning/pinecone-learning/Get-Started-With-Langchain-and-Pinecone-in-Node.js/documents/Romeo and Juliet.txt
+Splitting text into chunks...
+Text split into 216 chunks
+Calling OpenAI's Embedding endpoint documents with 216 text chunks ...
+Finished embedding documents
+Creating 216 vectors array with id, values, and metadata...
+Upserted undefined vectors
+Upserted undefined vectors
+Upserted undefined vectors
+Pinecone index updated with 216 vectors
+Processing document: /Users/casianorodriguezleon/campus-virtual/2223/learning/pinecone-learning/Get-Started-With-Langchain-and-Pinecone-in-Node.js/documents/The Great Gatsby.txt
+Splitting text into chunks...
+Text split into 382 chunks
+Calling OpenAI's Embedding endpoint documents with 382 text chunks ...
+Finished embedding documents
+Creating 382 vectors array with id, values, and metadata...
+Upserted undefined vectors
+Upserted undefined vectors
+Upserted undefined vectors
+Upserted undefined vectors
+Pinecone index updated with 382 vectors
+Querying Pinecone vector store...
+Found 10 matches...
+Asking question: What is the most hidden secret?...
+Answer:  The most hidden secret is that Wilson is gay.
 
+## Pinecone Indexes Dashboard
+
+![/images/pinecone-index-dashboard-1.png](/images/pinecone-index-dashboard-1.png)
+
+![/images/pinecone-index-dashboard-2.png](/images/pinecone-index-dashboard-2.png)
+
+![/images/pinecone-index-dashboard-2.png](/images/pinecone-index-dashboard-2.png)
