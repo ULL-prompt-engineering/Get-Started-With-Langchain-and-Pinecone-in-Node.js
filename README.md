@@ -180,8 +180,14 @@ Answer:  The most hidden secret is that Wilson is gay.
 
 ## Pinecone Indexes Dashboard
 
+This is the `indexes` dashboard:
+
 ![/images/pinecone-index-dashboard-1.png](/images/pinecone-index-dashboard-1.png)
 
-![/images/pinecone-index-dashboard-2.png](/images/pinecone-index-dashboard-2.png)
+When we click on the `your-pinecone-index-name` we can see:
 
 ![/images/pinecone-index-dashboard-2.png](/images/pinecone-index-dashboard-2.png)
+
+When we click on the `connect` button we can see a pop-up window with the code:
+
+![/images/pinecone-index-dashboard-3.png](/images/pinecone-index-dashboard-3.png)
