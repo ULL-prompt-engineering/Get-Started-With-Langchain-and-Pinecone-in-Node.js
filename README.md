@@ -24,6 +24,9 @@ You are in lesson [Pinecone](https://github.com/ULL-prompt-engineering/prompt-en
 * See Developers Digest youtube tutorial: https://youtu.be/CF5buEVrYwo. This crash course will guide us through the basics of programming with Langchain and Pinecone.
   * [![Langchain and Pinecone Youtube tutorial](https://img.youtube.com/vi/CF5buEVrYwo/maxresdefault.jpg)](https://youtu.be/CF5buEVrYwo) 
 * [Prompt Engineering 101](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/README.md) course
+* [What is a Vector Database?](https://www.pinecone.io/learn/vector-database/#similarity measures) by Roie Schwaber-Cohen
+* [Google Developers Machine Learning Crash Course: Embeddings video](https://developers.google.com/machine-learning/crash-course/embeddings/video-lecture?hl=en)
+
 
 ## Versions
 
@@ -67,6 +70,11 @@ Once an index is created using a particular pod type, you cannot change the pod 
 Different pod types are priced differently. See [pricing](https://www.pinecone.io/pricing/) for more details.
 
 ## Vector databases
+
+With a vector database, we can add advanced features to our AIs, like 
+
+1. semantic information retrieval, 
+2. long-term memory. 
 
 Vector databases are built to manage vector embeddings, providing several advantages over using standalone vector indices:
 
