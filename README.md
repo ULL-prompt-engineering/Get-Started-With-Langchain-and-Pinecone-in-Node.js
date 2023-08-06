@@ -4,6 +4,8 @@
   - [Versions](#versions)
   - [File Loaders](#file-loaders)
   - [Understanding indexes](#understanding-indexes)
+  - [Pods](#pods)
+  - [Vector databases](#vector-databases)
   - [Understanding collections](#understanding-collections)
   - [Computing the vector dimension](#computing-the-vector-dimension)
     - [Number of vectors](#number-of-vectors)
@@ -47,6 +49,25 @@ See
 
 Standalone vector indices like [FAISS](https://www.pinecone.io/learn/faiss/) (**Facebook AI Similarity Search**) can significantly improve search and retrieval of vector embeddings, but they lack capabilities that exist in any database. 
 
+An index is the highest-level organizational unit of vector data in Pinecone. 
+It accepts and stores vectors, serves queries over the vectors it contains, and does other vector operations over its contents. 
+
+Each index runs on at least one **pod**[^1].
+
+[^1]: **seed pod**. noun. a **carpel** (female reproductive organ) or **pistil** (usually is located in the center of the flower is made up of three parts: the stigma, style, and ovary) enclosing the seeds of a plant, esp a flowering plant. So **pineconce pods** are the seeds of the pinecone.
+
+## Pods
+
+**Pods** are pre-configured units of hardware for running a Pinecone service. 
+
+Each index runs on one or more pods. Generally, more pods mean more storage capacity, lower latency, and higher throughput. You can also create pods of different sizes.
+
+Once an index is created using a particular pod type, you cannot change the pod type for that index. However, [you can create a new index from that collection](https://docs.pinecone.io/docs/manage-indexes/#create-an-index-from-a-collection) with a different pod type. 
+
+Different pod types are priced differently. See [pricing](https://www.pinecone.io/pricing/) for more details.
+
+## Vector databases
+
 Vector databases, on the other hand, are purpose-built to manage vector embeddings, providing several advantages over using standalone vector indices:
 
 1. **Data management**: Vector databases offer well-known and easy-to-use features for data storage, like inserting, deleting, and updating data
@@ -64,24 +85,6 @@ Vector databases, on the other hand, are purpose-built to manage vector embeddin
 7. **Data security and access control**
 
 [^2]: An ETL pipeline is the set of processes used to move data from a source or multiple sources into a database such as a data warehouse. **ETL stands for “extract, transform, load,”** the three interdependent processes of data integration used to pull data from one database and move it to another.
-
-
-An index is the highest-level organizational unit of vector data in Pinecone. 
-It accepts and stores vectors, serves queries over the vectors it contains, and does other vector operations over its contents. 
-
-
-Each index runs on at least one **pod**[^1].
-
-[^1]: **seed pod**. noun. a **carpel** (female reproductive organ) or **pistil** (usually is located in the center of the flower is made up of three parts: the stigma, style, and ovary) enclosing the seeds of a plant, esp a flowering plant. So **pineconce pods** are the seeds of the pinecone.
-
-**Pods** are pre-configured units of hardware for running a Pinecone service. 
-
-Each index runs on one or more pods. Generally, more pods mean more storage capacity, lower latency, and higher throughput. You can also create pods of different sizes.
-
-Once an index is created using a particular pod type, you cannot change the pod type for that index. However, [you can create a new index from that collection](https://docs.pinecone.io/docs/manage-indexes/#create-an-index-from-a-collection) with a different pod type. 
-
-
-Different pod types are priced differently. See [pricing](https://www.pinecone.io/pricing/) for more details.
 
 ## Understanding collections
 
