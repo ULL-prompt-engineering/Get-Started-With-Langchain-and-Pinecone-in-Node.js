@@ -47,7 +47,7 @@ See
 
 ## Understanding indexes
 
-Standalone vector indices like [FAISS](https://www.pinecone.io/learn/faiss/) (**Facebook AI Similarity Search**) can significantly improve search and retrieval of vector embeddings, but they lack capabilities that exist in any database. 
+Standalone vector indices like [FAISS](https://www.pinecone.io/learn/faiss/) (**Facebook AI Similarity Search**) can significantly **improve search and retrieval of vector embeddings** (but they lack capabilities that exist in a database). 
 
 An index is the highest-level organizational unit of vector data in Pinecone. 
 It accepts and stores vectors, serves queries over the vectors it contains, and does other vector operations over its contents. 
