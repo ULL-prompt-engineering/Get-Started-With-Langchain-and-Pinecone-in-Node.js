@@ -15,7 +15,7 @@
 
 ## Back to the tutorial
 
-[Prompt Engineering 101](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/README.md)
+You are in lesson [Pinecone](https://github.com/ULL-prompt-engineering/prompt-engineering-101/tree/main#lesson-7-pinecone) of the [Prompt Engineering 101](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/README.md) course.
 
 ## References
 
@@ -184,7 +184,7 @@ This is the `indexes` dashboard:
 
 ![/images/pinecone-index-dashboard-1.png](/images/pinecone-index-dashboard-1.png)
 
-When we click on the `your-pinecone-index-name` we can see:
+When we click on the `your-pinecone-index-name` link we can see:
 
 ![/images/pinecone-index-dashboard-2.png](/images/pinecone-index-dashboard-2.png)
 
