@@ -41,7 +41,7 @@ See
 * Section LangChain [Document Loaders](https://github.com/ULL-prompt-engineering/prompt-engineering-101/tree/main/lesson5#document-loaders) in the [Prompt Engineering 101](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/README.md) course
   * Example [document-pdf-loader.mjs](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/lesson5/src/document-pdf-loader.mjs)
   * Example [document-github-loader.mjs](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/lesson5/src/document-github-loader.mjs)
-* [LangChain File Loaders](https://js.langchain.com/docs/modules/data_connection/document_loaders/integrations/file_loaders/)
+* [LangChain File Loaders](https://js.langchain.com/docs/modules/data_connection/document_loaders/integrations/file_loaders/) in LangChain docs
 
 ## Understanding indexes
 
