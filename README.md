@@ -19,9 +19,8 @@ You are in lesson [Pinecone](https://github.com/ULL-prompt-engineering/prompt-en
 
 ## References
 
-From Developers Digest youtube tutorial: https://youtu.be/CF5buEVrYwo
-
-This crash course will guide us through the basics of programming with Langchain and Pinecone.
+* See Developers Digest youtube tutorial: https://youtu.be/CF5buEVrYwo. This crash course will guide us through the basics of programming with Langchain and Pinecone.
+* Prompt Engineering 101](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/README.md) course
 
 ## Versions
 
