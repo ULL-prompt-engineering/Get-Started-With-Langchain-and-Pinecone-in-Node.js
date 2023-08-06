@@ -181,6 +181,7 @@ Each dimension on a single vector consumes 4 bytes of memory and storage per dim
 
 Using that reference, we can estimate the typical pod size and number needed for a given index. This [Table](https://docs.pinecone.io/docs/choosing-index-type-and-size#dimensionality-of-vectors)  gives some examples of this.
 
+A good empirical rule of thumb is [the number of dimensions to be **roughly the fourth root of the size of my vocabulary**, the number of possible values](https://developers.google.com/machine-learning/crash-course/embeddings/video-lecture?hl=en). But this is just a rule of thumb and with all hyperparameters you really need to go use validation data and try it out for your problem and see what gives the best results.
 
 ## Execution
 
