@@ -45,7 +45,7 @@ It accepts and stores vectors, serves queries over the vectors it contains, and 
 
 Each index runs on at least one **pod**[^1].
 
-[^1]: **seed pod**. noun. a carpel (female reproductive organ) or pistil (he pistil usually is located in the center of the flower and is made up of three parts: the stigma, style, and ovary) enclosing the seeds of a plant, esp a flowering plant. So pineconce pods are the seeds of the pinecone.
+[^1]: **seed pod**. noun. a **carpel** (female reproductive organ) or pistil (usually is located in the center of the flower is made up of three parts: the stigma, style, and ovary) enclosing the seeds of a plant, esp a flowering plant. So pineconce pods are the seeds of the pinecone.
 
 **Pods** are pre-configured units of hardware for running a Pinecone service. 
 
