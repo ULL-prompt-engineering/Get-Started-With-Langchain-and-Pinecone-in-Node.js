@@ -68,7 +68,7 @@ Different pod types are priced differently. See [pricing](https://www.pinecone.i
 
 ## Vector databases
 
-Vector databases, on the other hand, are purpose-built to manage vector embeddings, providing several advantages over using standalone vector indices:
+Vector databases are built to manage vector embeddings, providing several advantages over using standalone vector indices:
 
 1. **Data management**: Vector databases offer well-known and easy-to-use features for data storage, like inserting, deleting, and updating data
 2. **Metadata storage and filtering**: Vector databases can store metadata associated with each vector entry. Users can then query the database using additional metadata filters for finer-grained queries
