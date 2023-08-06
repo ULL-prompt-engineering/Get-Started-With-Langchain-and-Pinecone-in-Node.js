@@ -145,6 +145,7 @@ Using that reference, we can estimate the typical pod size and number needed for
 
 ## Execution
 
+``` 
 ➜  Get-Started-With-Langchain-and-Pinecone-in-Node.js git:(casiano) node 0-main.js
 Checking "your-pinecone-index-name"...
 "your-pinecone-index-name" already exists.
@@ -175,6 +176,7 @@ Querying Pinecone vector store...
 Found 10 matches...
 Asking question: What is the most hidden secret?...
 Answer:  The most hidden secret is that Wilson is gay.
+```
 
 ## Pinecone Indexes Dashboard
 
