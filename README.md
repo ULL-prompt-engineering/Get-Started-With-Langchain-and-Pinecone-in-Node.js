@@ -10,6 +10,8 @@
   - [Computing the vector dimension](#computing-the-vector-dimension)
     - [Number of vectors](#number-of-vectors)
     - [Dimensionality of vectors](#dimensionality-of-vectors)
+- [0-main.js](#0-mainjs)
+  - [1-createPineconeIndex.js](#1-createpineconeindexjs)
   - [Execution](#execution)
   - [Pinecone Indexes Dashboard](#pinecone-indexes-dashboard)
 
@@ -182,6 +184,101 @@ Each dimension on a single vector consumes 4 bytes of memory and storage per dim
 Using that reference, we can estimate the typical pod size and number needed for a given index. This [Table](https://docs.pinecone.io/docs/choosing-index-type-and-size#dimensionality-of-vectors)  gives some examples of this.
 
 A good empirical rule of thumb is [the number of dimensions to be **roughly the fourth root of the size of my vocabulary**, the number of possible values](https://developers.google.com/machine-learning/crash-course/embeddings/video-lecture?hl=en). But this is just a rule of thumb and with all hyperparameters you really need to go use validation data and try it out for your problem and see what gives the best results.
+
+# 0-main.js
+
+The first part is:
+
+1. Initialize a new project with: `npm init -y` or use the [package.json](package.json)
+2.  Create the 4 js files 
+  - [0-main](0-main).js                     
+  - [1-createPineconeIndex](1-createPineconeIndex).js      
+  - [2-updatePinecone](2-updatePinecone).js           
+  - [3-queryPineconeAndQueryGPT](3-queryPineconeAndQueryGPT).js
+3. Create the [.env](.env) file 
+1. npm i "@pinecone-database/pinecone@^0.0.10" dotenv@^16.0.3 langchain@^0.0.73
+2. Obtain API key from OpenAI (https://platform.openai.com/account/api-keys)
+3. Obtain API key from Pinecone (https://app.pinecone.io/)
+4. Enter API keys in .env file
+
+```js
+// Optional: if you want to use other file loaders (https://js.langchain.com/docs/modules/indexes/document_loaders/examples/file_loaders/)
+import { PineconeClient } from "@pinecone-database/pinecone";
+import { DirectoryLoader } from "langchain/document_loaders/fs/directory";
+import { TextLoader } from "langchain/document_loaders/fs/text";
+import { PDFLoader } from "langchain/document_loaders/fs/pdf";
+import * as dotenv from "dotenv";
+import { createPineconeIndex } from "./1-createPineconeIndex.js";
+import { updatePinecone } from "./2-updatePinecone.js";
+import { queryPineconeVectorStoreAndQueryLLM } from "./3-queryPineconeAndQueryGPT.js";
+// 6. Load environment variables
+dotenv.config();
+
+// 7. Set up DirectoryLoader to load documents from the ./documents directory
+const loader = new DirectoryLoader("./documents", {
+    ".txt": (path) => new TextLoader(path),
+    ".pdf": (path) => new PDFLoader(path),
+});
+const docs = await loader.load();
+
+// 8. Set up variables for the filename, question, and index settings
+const question = "What is the most hidden secret?";
+const indexName = "your-pinecone-index-name";
+const vectorDimension = 1536;
+
+// 9. Initialize Pinecone client with API key and environment
+const client = new PineconeClient();
+await client.init({
+  apiKey: process.env.PINECONE_API_KEY,
+  environment: process.env.PINECONE_ENVIRONMENT,
+});
+
+// 10. Run the main async function
+(async () => {
+// 11. Check if Pinecone index exists and create if necessary
+  await createPineconeIndex(client, indexName, vectorDimension);
+
+// 12. Update Pinecone vector store with document embeddings
+  await updatePinecone(client, indexName, docs);
+
+// 13. Query Pinecone vector store and GPT model for an answer
+  await queryPineconeVectorStoreAndQueryLLM(client, indexName, question);
+})();
+```
+
+## 1-createPineconeIndex.js
+
+```js
+export const createPineconeIndex = async (client, indexName, vectorDimension) => {
+  // 1. Initiate index existence check
+  console.log(`Checking "${indexName}"...`);
+  // 2. Get list of existing indexes
+  const existingIndexes = await client.listIndexes();
+
+  // 3. If index doesn't exist, create it
+  if (!existingIndexes.includes(indexName)) {
+    // 4. Log index creation initiation
+    console.log(`Creating "${indexName}"...`);
+    // 5. Create index
+    const createClient = await client.createIndex({
+      createRequest: {
+        name: indexName,
+        dimension: vectorDimension,
+        metric: "cosine",
+      },
+    });
+    // 6. Log successful creation
+    console.log(`Created with client:`, createClient);
+    
+    // 7. Wait 60 seconds for index initialization
+    await new Promise((resolve) => setTimeout(resolve, 60000));
+  
+  } else {
+    // 8. Log if index already exists
+    console.log(`"${indexName}" already exists.`);
+  }
+};
+```
 
 ## Execution
 
