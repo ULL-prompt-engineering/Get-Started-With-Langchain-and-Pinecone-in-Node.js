@@ -206,7 +206,6 @@ The first part is:
 Now we make our imports:
 
 ```js
-// Optional: if you want to use other file loaders (https://js.langchain.com/docs/modules/indexes/document_loaders/examples/file_loaders/)
 import { PineconeClient } from "@pinecone-database/pinecone";
 import { DirectoryLoader } from "langchain/document_loaders/fs/directory";
 import { TextLoader } from "langchain/document_loaders/fs/text";
@@ -216,6 +215,9 @@ import { createPineconeIndex } from "./1-createPineconeIndex.js";
 import { updatePinecone } from "./2-updatePinecone.js";
 import { queryPineconeVectorStoreAndQueryLLM } from "./3-queryPineconeAndQueryGPT.js";
 ```
+Optionally, if we want to use other file loaders for CSV, JSON, etc. (https://js.langchain.com/docs/modules/indexes/document_loaders/examples/file_loaders/) we can import them as well.
+
+```js
 
 and load environment variables
 
