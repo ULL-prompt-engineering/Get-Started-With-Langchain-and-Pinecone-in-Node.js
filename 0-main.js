@@ -22,7 +22,7 @@ const loader = new DirectoryLoader("./documents", {
 });
 const docs = await loader.load();
 
-// 8. Set up variables for the filename, question, and index settings
+// 8. Set up variables for question, index name, and vector dimension
 const question = "What is the most hidden secret?";
 const indexName = "your-pinecone-index-name";
 const vectorDimension = 1536;

@@ -203,6 +203,8 @@ The first part is:
    [![Obtain API key from Pinecone](/images/pinecone-api-key.png)](https://app.pinecone.io/)
 7. Fill the API keys in `.env` file
 
+Now we make our imports:
+
 ```js
 // Optional: if you want to use other file loaders (https://js.langchain.com/docs/modules/indexes/document_loaders/examples/file_loaders/)
 import { PineconeClient } from "@pinecone-database/pinecone";
@@ -213,21 +215,48 @@ import * as dotenv from "dotenv";
 import { createPineconeIndex } from "./1-createPineconeIndex.js";
 import { updatePinecone } from "./2-updatePinecone.js";
 import { queryPineconeVectorStoreAndQueryLLM } from "./3-queryPineconeAndQueryGPT.js";
-// 6. Load environment variables
-dotenv.config();
+```
 
-// 7. Set up DirectoryLoader to load documents from the ./documents directory
+and load environment variables
+
+```js 
+dotenv.config();
+```
+
+Set up `DirectoryLoader` to load documents from the `./documents` directory
+
+```js
 const loader = new DirectoryLoader("./documents", {
     ".txt": (path) => new TextLoader(path),
     ".pdf": (path) => new PDFLoader(path),
 });
 const docs = await loader.load();
+```
 
-// 8. Set up variables for the filename, question, and index settings
+Next, we set up variables for the `question`, the Pinecone `indexName`, and the `vectorDimension`.
+Adjusting the vector dimension can impact the accuracy and performance of the search, so it's important to choose an adequate dimension based on your specific use case and data.
+
+```js
 const question = "What is the most hidden secret?";
 const indexName = "your-pinecone-index-name";
 const vectorDimension = 1536;
+```
+A good empirical rule of thumb is [the number of dimensions to be **roughly the fourth root of the size of my vocabulary**, the number of possible values](https://developers.google.com/machine-learning/crash-course/embeddings/video-lecture?hl=en). But this is just a rule of thumb and with all hyperparameters you really need to go use validation data and try it out for your problem and see what gives the best results. If you go to the [OpenAI Embeddings reference guide](https://platform.openai.com/docs/guides/embeddings/embedding-models) you can see among their recommendations this:
 
+<table>
+<thead>
+<tr>
+<th>Model name</th><th>tokenizer</th><th>max input tokens</th><th>output dimensions</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>text-embedding-ada-002</td><td>cl100k_base</td><td>8191</td><td>1536</td></tr>
+</tbody>
+</table>
+
+See section [Choosing index type and size](https://docs.pinecone.io/docs/choosing-index-type-and-size) of  the Pinecone docs.
+
+```js
 // 9. Initialize Pinecone client with API key and environment
 const client = new PineconeClient();
 await client.init({
