@@ -196,12 +196,12 @@ The first part is:
   - [2-updatePinecone.js](2-updatePinecone.js)           
   - [3-queryPineconeAndQueryGPT.js](3-queryPineconeAndQueryGPT.js)
 3. Create the [.env](.env) file 
-1. Install depedencies: `npm i "@pinecone-database/pinecone@^0.0.10" dotenv@^16.0.3 langchain@^0.0.73` or `npm i` if you are reusing the [package.json](package.json)
-2. Obtain API key from [OpenAI](https://platform.openai.com/account/api-keys) (https://platform.openai.com/account/api-keys)
-3. Obtain API key from [Pinecone](https://app.pinecone.io/) (https://app.pinecone.io/)
+4. Install depedencies: `npm i "@pinecone-database/pinecone@^0.0.10" dotenv@^16.0.3 langchain@^0.0.73` or `npm i` if you are reusing the [package.json](package.json)
+5. Obtain API key from [OpenAI](https://platform.openai.com/account/api-keys) (https://platform.openai.com/account/api-keys)
+6. Obtain API key from [Pinecone](https://app.pinecone.io/) (https://app.pinecone.io/)
 
   [![Obtain API key from Pinecone](/images/pinecone-api-key.png)](https://app.pinecone.io/)
-4. Fill the API keys in `.env` file
+7. Fill the API keys in `.env` file
 
 ```js
 // Optional: if you want to use other file loaders (https://js.langchain.com/docs/modules/indexes/document_loaders/examples/file_loaders/)
