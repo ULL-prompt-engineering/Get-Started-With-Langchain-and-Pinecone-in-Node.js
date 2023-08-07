@@ -10,7 +10,7 @@
   - [Computing the vector dimension](#computing-the-vector-dimension)
     - [Number of vectors](#number-of-vectors)
     - [Dimensionality of vectors](#dimensionality-of-vectors)
-- [0-main.js](#0-mainjs)
+  - [0-main.js](#0-mainjs)
   - [1-createPineconeIndex.js](#1-createpineconeindexjs)
   - [Execution](#execution)
   - [Pinecone Indexes Dashboard](#pinecone-indexes-dashboard)
@@ -185,7 +185,7 @@ Using that reference, we can estimate the typical pod size and number needed for
 
 A good empirical rule of thumb is [the number of dimensions to be **roughly the fourth root of the size of my vocabulary**, the number of possible values](https://developers.google.com/machine-learning/crash-course/embeddings/video-lecture?hl=en). But this is just a rule of thumb and with all hyperparameters you really need to go use validation data and try it out for your problem and see what gives the best results.
 
-# 0-main.js
+## 0-main.js
 
 The first part is:
 
