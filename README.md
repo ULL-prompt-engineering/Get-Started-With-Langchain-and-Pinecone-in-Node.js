@@ -267,6 +267,11 @@ await client.init({
 });
 ```
 
+[The `init` method of a `PineconeClient` object](https://docs.pinecone.io/docs/node-client#init) is used to initialize the client and establish a connection with the Pinecone service. It takes an object as a parameter with the following properties:
+
+- `apiKey`: This property is used to provide the API key for authentication with the Pinecone service. The API key is obtained from the Pinecone dashboard and is required to access the service.
+- `environment`: This property is used to specify the cloud environment of your Pinecone project.
+
 We then  run the  `async` function containing the main code that takes three steps:
 
 1. The function `createPineconeIndex` exported by `1-createPineconeIndex.js` checks if the index exists and creates it if necessary. 
