@@ -190,7 +190,7 @@ A good empirical rule of thumb is [the number of dimensions to be **roughly the 
 The first part is:
 
 1. Initialize a new project with: `npm init -y` or use the [package.json](package.json)
-2.  Create the 4 js files 
+2.  Create the four empty `.js` files 
   - [0-main.js](0-main.js)                     
   - [1-createPineconeIndex.js](1-createPineconeIndex.js)      
   - [2-updatePinecone.js](2-updatePinecone.js)           
