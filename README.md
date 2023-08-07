@@ -200,7 +200,7 @@ The first part is:
 5. Obtain API key from [OpenAI](https://platform.openai.com/account/api-keys) (https://platform.openai.com/account/api-keys)
 6. Obtain API key from [Pinecone](https://app.pinecone.io/) (https://app.pinecone.io/)
 
-  [![Obtain API key from Pinecone](/images/pinecone-api-key.png)](https://app.pinecone.io/)
+   [![Obtain API key from Pinecone](/images/pinecone-api-key.png)](https://app.pinecone.io/)
 7. Fill the API keys in `.env` file
 
 ```js
