@@ -266,7 +266,9 @@ await client.init({
   environment: process.env.PINECONE_ENVIRONMENT,
 });
 ```
-We then  run the  `async` function containing the main code.
+
+We then  run the  `async` function containing the main code that takes three steps:
+
 1. The function `createPineconeIndex` exported by `1-createPineconeIndex.js` checks if the index exists and creates it if necessary. 
 2. The function `updatePinecone` exported by `2-updatePineconce.js` updates the Pinecone vector store with document embeddings. 
 3. The function `queryPineconeVectorStoreAndQueryLLM` exported by `3-queryPineconceAndQueryGPT` queries the Pinecone vector store and GPT model for an answer.
