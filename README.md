@@ -217,15 +217,13 @@ import { queryPineconeVectorStoreAndQueryLLM } from "./3-queryPineconeAndQueryGP
 ```
 Optionally, if we want to use other file loaders for CSV, JSON, etc. (https://js.langchain.com/docs/modules/indexes/document_loaders/examples/file_loaders/) we can import them as well.
 
-```js
-
-and load environment variables
+Then we load the environment variables from `.env`  that will be accesible in `process.env`:
 
 ```js 
 dotenv.config();
 ```
 
-Set up `DirectoryLoader` to load documents from the `./documents` directory
+Set up `DirectoryLoader` to load all the documents from the `./documents` directory
 
 ```js
 const loader = new DirectoryLoader("./documents", {
@@ -234,6 +232,7 @@ const loader = new DirectoryLoader("./documents", {
 });
 const docs = await loader.load();
 ```
+The [DirectoryLoader](https://js.langchain.com/docs/api/document_loaders_fs_directory/classes/DirectoryLoader) is a class that allows you to load all documents in a directory. It takes two arguments: the `directory` path and a map of file extensions to loader factories. Each file in the `directory` will be passed to the matching loader, and the resulting documents will be concatenated together.
 
 Next, we set up variables for the `question`, the Pinecone `indexName`, and the `vectorDimension`.
 Adjusting the vector dimension can impact the accuracy and performance of the search, so it's important to choose an adequate dimension based on your specific use case and data.
