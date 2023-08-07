@@ -272,8 +272,6 @@ We then  run the  `async` function containing the main code.
 3. The function `queryPineconeVectorStoreAndQueryLLM` exported by `3-queryPineconceAndQueryGPT` queries the Pinecone vector store and GPT model for an answer.
 
 ```js
-
-```js
 (async () => {
   await createPineconeIndex(client, indexName, vectorDimension);
   await updatePinecone(client, indexName, docs);
