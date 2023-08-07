@@ -257,8 +257,9 @@ A good empirical rule of thumb is [the number of dimensions to be **roughly the 
 
 See section [Choosing index type and size](https://docs.pinecone.io/docs/choosing-index-type-and-size) of  the Pinecone docs.
 
+Now we onitialize the Pinecone client with the API key and the environment
+
 ```js
-// 9. Initialize Pinecone client with API key and environment
 const client = new PineconeClient();
 await client.init({
   apiKey: process.env.PINECONE_API_KEY,
