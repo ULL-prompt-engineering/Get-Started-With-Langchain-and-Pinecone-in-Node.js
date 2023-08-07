@@ -10,7 +10,7 @@
   - [Computing the vector dimension](#computing-the-vector-dimension)
     - [Number of vectors](#number-of-vectors)
     - [Dimensionality of vectors](#dimensionality-of-vectors)
-  - [0-main.js](#0-mainjs)
+- [0-main.js](#0-mainjs)
   - [1-createPineconeIndex.js](#1-createpineconeindexjs)
   - [Execution](#execution)
   - [Pinecone Indexes Dashboard](#pinecone-indexes-dashboard)
@@ -185,16 +185,16 @@ Using that reference, we can estimate the typical pod size and number needed for
 
 A good empirical rule of thumb is [the number of dimensions to be **roughly the fourth root of the size of my vocabulary**, the number of possible values](https://developers.google.com/machine-learning/crash-course/embeddings/video-lecture?hl=en). But this is just a rule of thumb and with all hyperparameters you really need to go use validation data and try it out for your problem and see what gives the best results.
 
-## 0-main.js
+# 0-main.js
 
 The first part is:
 
 1. Initialize a new project with: `npm init -y` or use the [package.json](package.json)
 2.  Create the 4 js files 
-  - [0-main](0-main).js                     
-  - [1-createPineconeIndex](1-createPineconeIndex).js      
-  - [2-updatePinecone](2-updatePinecone).js           
-  - [3-queryPineconeAndQueryGPT](3-queryPineconeAndQueryGPT).js
+  - [0-main.js](0-main.js)                     
+  - [1-createPineconeIndex.js](1-createPineconeIndex.js)      
+  - [2-updatePinecone.js](2-updatePinecone.js)           
+  - [3-queryPineconeAndQueryGPT.js](3-queryPineconeAndQueryGPT.js)
 3. Create the [.env](.env) file 
 1. npm i "@pinecone-database/pinecone@^0.0.10" dotenv@^16.0.3 langchain@^0.0.73
 2. Obtain API key from OpenAI (https://platform.openai.com/account/api-keys)
