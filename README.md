@@ -191,10 +191,10 @@ The first part is:
 
 1. Initialize a new project with: `npm init -y` or use the [package.json](package.json)
 2.  Create the four empty `.js` files 
-  - [0-main.js](0-main.js)                     
-  - [1-createPineconeIndex.js](1-createPineconeIndex.js)      
-  - [2-updatePinecone.js](2-updatePinecone.js)           
-  - [3-queryPineconeAndQueryGPT.js](3-queryPineconeAndQueryGPT.js)
+   - [0-main.js](0-main.js)                     
+   - [1-createPineconeIndex.js](1-createPineconeIndex.js)      
+   - [2-updatePinecone.js](2-updatePinecone.js)           
+   - [3-queryPineconeAndQueryGPT.js](3-queryPineconeAndQueryGPT.js)
 3. Create the [.env](.env) file 
 4. Install depedencies: `npm i "@pinecone-database/pinecone@^0.0.10" dotenv@^16.0.3 langchain@^0.0.73` or `npm i` if you are reusing the [package.json](package.json)
 5. Obtain API key from [OpenAI](https://platform.openai.com/account/api-keys) (https://platform.openai.com/account/api-keys)
