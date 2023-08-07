@@ -257,7 +257,7 @@ A good empirical rule of thumb is [the number of dimensions to be **roughly the 
 
 See section [Choosing index type and size](https://docs.pinecone.io/docs/choosing-index-type-and-size) of  the Pinecone docs.
 
-Now we onitialize the Pinecone client with the API key and the environment
+Now we initialize the Pinecone client with the API key and the environment. The environment is the string (s.t. like `us-west1-gcp-free`) you see  in the [Pinecone console](https://app.pinecone.io/). If you don't specify an environment, the client will use the default environment.
 
 ```js
 const client = new PineconeClient();
@@ -265,16 +265,18 @@ await client.init({
   apiKey: process.env.PINECONE_API_KEY,
   environment: process.env.PINECONE_ENVIRONMENT,
 });
+```
+We then  run the  `async` function containing the main code.
+1. The function `createPineconeIndex` exported by `1-createPineconeIndex.js` checks if the index exists and creates it if necessary. 
+2. The function `updatePinecone` exported by `2-updatePineconce.js` updates the Pinecone vector store with document embeddings. 
+3. The function `queryPineconeVectorStoreAndQueryLLM` exported by `3-queryPineconceAndQueryGPT` queries the Pinecone vector store and GPT model for an answer.
 
-// 10. Run the main async function
+```js
+
+```js
 (async () => {
-// 11. Check if Pinecone index exists and create if necessary
   await createPineconeIndex(client, indexName, vectorDimension);
-
-// 12. Update Pinecone vector store with document embeddings
   await updatePinecone(client, indexName, docs);
-
-// 13. Query Pinecone vector store and GPT model for an answer
   await queryPineconeVectorStoreAndQueryLLM(client, indexName, question);
 })();
 ```
