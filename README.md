@@ -515,9 +515,14 @@ The [loadQAStuffChain](https://js.langchain.com/docs/api/chains/functions/loadQA
 
 ![/images/stuff-chain.jpeg](/images/stuff-chain.jpeg)
 
-This chain is designed for applications where the documents are small and only a few are passed in for most calls.
+This chain is designed for applications where the documents are small and only a few are passed in for most calls. Here is how we are going to use it:
 
-Then we define and  export the `queryPineconeVectorStoreAndQueryLLM` function:
+```js
+const llm = new OpenAI({});
+const chain = loadQAStuffChain(llm);
+```
+
+After the import we define and  export the `queryPineconeVectorStoreAndQueryLLM` function which has the following structure:
 
 ```js
 export const queryPineconeVectorStoreAndQueryLLM = async (client, indexName,  question) => {
