@@ -522,6 +522,16 @@ const llm = new OpenAI({});
 const chain = loadQAStuffChain(llm);
 ```
 
+Then the chain takes the list of documents and the question and returns the answer:
+
+```js
+const concatenatedPageContent = queryResponse.matches.map((match) => match.metadata.pageContent).join(" ");
+const result = await chain.call({
+    input_documents: [new Document({ pageContent: concatenatedPageContent })],
+    question: question,
+});
+```
+
 After the import we define and  export the `queryPineconeVectorStoreAndQueryLLM` function which has the following structure:
 
 ```js
