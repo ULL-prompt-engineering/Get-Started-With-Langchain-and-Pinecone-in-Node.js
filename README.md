@@ -383,8 +383,6 @@ import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 The other class we import is the [RecursiveCharacterTextSplitter](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/lesson5/README.md#textsplitter) which is described in 
 [Lesson 5: TextSplitters](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/lesson5/README.md#textsplitter).
 
-![/images/myknowledgetovectordb.png](/images/myknowledgetovectordb.png)
-
 
 ```js
 // 2. Export updatePinecone function
