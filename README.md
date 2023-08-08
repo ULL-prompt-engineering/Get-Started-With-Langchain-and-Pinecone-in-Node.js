@@ -299,18 +299,59 @@ We then  run the  `async` function containing the main code that takes three ste
 
 ## 1-createPineconeIndex.js
 
-```js
+
+The function `createPineconeIndex`  is called with the Pinecone client, the name of the Pinecone index and the vector dimension 
+ `await createPineconeIndex(client, indexName, vectorDimension)` and checks if the index exists and creates it if necessary.
+
+To check for the existence we get list of existing indexes using [client.listIndexes()](https://docs.pinecone.io/docs/node-client#listindexes) that returns an array of strings with the names of the indexes in our project.
+ 
+``` js
 export const createPineconeIndex = async (client, indexName, vectorDimension) => {
-  // 1. Initiate index existence check
-  console.log(`Checking "${indexName}"...`);
-  // 2. Get list of existing indexes
   const existingIndexes = await client.listIndexes();
 
-  // 3. If index doesn't exist, create it
   if (!existingIndexes.includes(indexName)) {
-    // 4. Log index creation initiation
-    console.log(`Creating "${indexName}"...`);
-    // 5. Create index
+    // Create index ...
+    // Wait XX seconds for index initialization  
+  } else {
+    console.log(`"${indexName}" already exists.`);
+  }
+};
+
+```
+To create an index we use the method [client.createIndex](https://docs.pinecone.io/docs/node-client#createindex). 
+By default, Pinecone indexes all metadata but you can specify which metadata fields to index by passing a list of field names to the `indexed` property of the `createRequest.metadataConfig` object. The following example creates an index that only indexes the "`color`" metadata field. Queries against this index cannot filter based on any other metadata field.
+
+```js
+await client.createIndex({
+  createRequest: {
+    name: "example-index-2",
+    dimension: 1024,
+    metadataConfig: {
+      indexed: ["color"],
+    },
+  },
+});
+```
+
+The following table describes the parameters of the `createIndex` method:
+
+| Parameters | Type    | Description                                                                                                                                                                                                                                                                                                                                                   |
+| ----------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `name`     | str     | The name of the index to be created. The maximum length is 45 characters                                                                                                                                                                                                                                                                                      |
+| `dimension`| integer | The dimensions of the vectors to be inserted in the index.                                                                                                                                                                                                                                                                                                    |
+| `metric`   | str     | (Optional) The distance metric to be used for similarity search: 'euclidean', 'cosine', or 'dotproduct'.                                                                                                                                                                                                                                                      |
+| `pods`     | int     | (Optional) The number of pods for the index to use, including replicas.                                                                                                                                                                                                                                                                                       |
+| `replicas` | int     | (Optional) The number of replicas.                                                                                                                                                                                                                                                                                                                            |
+| `pod_type` | str     | (Optional) The new pod type for the index. One of `s1`, `p1`, or `p2` appended with `.` and one of `x1`, `x2`, `x4`, or `x8`.                                                                                                                                                                                                                                 |
+| `metadata_config` | object | (Optional) Configuration for the behavior of Pinecone's internal metadata index. By default, all metadata is indexed; when metadata_config is present, only specified metadata fields are indexed. To specify metadata fields to index, provide a JSON object of the following form: `{"indexed": ["example_metadata_field"]}` |
+| `source_collection` | str | (Optional) The name of the collection to create an index from.                                                                                                                                                                                                                                                                                                |
+
+
+```js
+export const createPineconeIndex = async (client, indexName, vectorDimension) => {
+  const existingIndexes = await client.listIndexes();
+
+  if (!existingIndexes.includes(indexName)) {
     const createClient = await client.createIndex({
       createRequest: {
         name: indexName,
@@ -318,14 +359,8 @@ export const createPineconeIndex = async (client, indexName, vectorDimension) =>
         metric: "cosine",
       },
     });
-    // 6. Log successful creation
-    console.log(`Created with client:`, createClient);
-    
-    // 7. Wait 60 seconds for index initialization
-    await new Promise((resolve) => setTimeout(resolve, 60000));
-  
+    await new Promise((resolve) => setTimeout(resolve, 60000));  
   } else {
-    // 8. Log if index already exists
     console.log(`"${indexName}" already exists.`);
   }
 };
