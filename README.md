@@ -429,38 +429,6 @@ The first step is to retrieve the Pinecone index using the [client.Index](https:
     }
     ```
 
-The loop full code is shown below:
-
-```js
-  const batchSize = 100;
-  const textSplitter = new RecursiveCharacterTextSplitter({
-    chunkSize: 1000,
-  });
-  for (const doc of docs) {
-    const txtPath = doc.metadata.source;
-    const text = doc.pageContent;
-  
-
-    const chunks = await textSplitter.createDocuments([text]);
-    console.log("Splitting text into chunks...");
-    const embeddingsArrays = await new OpenAIEmbeddings().embedDocuments(
-      chunks.map((chunk) => chunk.pageContent.replace(/\n/g, " "))
-    );
-
-    // Create and upsert vectors in batches of 100
-    let batch = [];
-    for (let idx = 0; idx < chunks.length; idx++) {
-      // ... When batch is full or it's the last item, upsert the vectors and empty the batch
-      if (batch.length === batchSize || idx === chunks.length - 1) {
-        try {
-          const upsertResponse = await index.upsert({ upsertRequest: { vectors: batch, }, });
-        } catch (error) { console.log(error);  }
-        batch = [];
-      }
-    }
-  }
-```
-
 The [Index.upsert](https://docs.pinecone.io/docs/node-client#indexupsert)`(requestParameters: UpsertOperationRequest)` method is used to write vectors into a namespace. If a new value is upserted for an existing vector ID, it will overwrite the previous value. It returns an `int64` containing the number of vectors upserted. Here is an example of usage:
 
 ``` js
