@@ -405,18 +405,19 @@ The first step is to retrieve the Pinecone index using the [client.Index](https:
   });
   ```
 2. Split text into chunks (documents) 
+   
   ```js 
   const text = doc.pageContent;
   const chunks = await textSplitter.createDocuments([text]);
   ```
-3. Create OpenAI embeddings for documents 
+1. Create OpenAI embeddings for documents 
    
    ```js 
    embeddingsArrays = await new OpenAIEmbeddings().embedDocuments(
      chunks.map((chunk) => chunk.pageContent.replace(/\n/g, " "))
    );
     ```
-4. Create and upsert vectors in batches of 100. When the batch is full or it's the last item, upsert the vectors and empty the batch
+2. Create and upsert vectors in batches of 100. When the batch is full or it's the last item, upsert the vectors and empty the batch
    
    ```js 
     let batch = [];
