@@ -400,9 +400,7 @@ The first step is to retrieve the Pinecone index using the [client.Index](https:
 1. Create `RecursiveCharacterTextSplitter` instance
 
   ```js 
-  const textSplitter = new RecursiveCharacterTextSplitter({
-    chunkSize: 1000,
-  });
+  const textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: 1000, });
   ```
 2. Split text into chunks (documents) 
    
