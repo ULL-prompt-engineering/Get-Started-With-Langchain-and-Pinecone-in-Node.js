@@ -407,7 +407,20 @@ The first step is to retrieve the Pinecone index using the [client.Index](https:
    );
     ```
 4. Create and upsert vectors in batches of 100. When the batch is full or it's the last item, upsert the vectors and empty the batch
-5. Log the number of vectors updated
+   
+   ```js 
+    let batch = [];
+    for (let idx = 0; idx < chunks.length; idx++) {
+      // ... When batch is full or it's the last item, upsert the vectors and empty the batch
+      if (batch.length === batchSize || idx === chunks.length - 1) {
+        try {  await index.upsert({ upsertRequest: { vectors: batch, }, }); } 
+        catch (error) { console.log(error);  }
+        batch = [];
+      }
+    }
+    ```
+
+The loop code is shown below:
 
 ```js
   const batchSize = 100;
