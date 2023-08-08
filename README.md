@@ -372,15 +372,19 @@ export const createPineconeIndex = async (client, indexName, vectorDimension) =>
 
 ## 2-updatePinecone.js
 
-![/images/myknowledgetovectordb.png](/images/myknowledgetovectordb.png)
-
 We start by importing the [OpenAIEmbeddings](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/lesson5/README.md#embeddings) class from `langchain/embeddings/openai`.
 See [lesson 5: embeddings](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/lesson5/README.md#embeddings).
 
 ```js
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+```
 
+![/images/myknowledgetovectordb.png](/images/myknowledgetovectordb.png)
+
+See [Lesson 5: TextSplitters](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/lesson5/README.md#textsplitter)
+
+```js
 // 2. Export updatePinecone function
 export const updatePinecone = async (client, indexName, docs) => {
   console.log("Retrieving Pinecone index...");
