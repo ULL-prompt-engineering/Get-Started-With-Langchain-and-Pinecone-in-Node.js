@@ -374,9 +374,10 @@ export const createPineconeIndex = async (client, indexName, vectorDimension) =>
 
 ![/images/myknowledgetovectordb.png](/images/myknowledgetovectordb.png)
 
+We start by importing the [OpenAIEmbeddings](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/lesson5/README.md#embeddings) class from `langchain/embeddings/openai`.
+See [lesson 5: embeddings](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/lesson5/README.md#embeddings).
 
 ```js
-// 1. Import required modules
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 
