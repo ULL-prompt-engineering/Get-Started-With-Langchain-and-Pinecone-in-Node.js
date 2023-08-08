@@ -420,7 +420,19 @@ The first step is to retrieve the Pinecone index using the [client.Index](https:
    ```js 
     let batch = [];
     for (let idx = 0; idx < chunks.length; idx++) {
-      // ... When batch is full or it's the last item, upsert the vectors and empty the batch
+      const chunk = chunks[idx];
+      const vector = {
+        id: `${txtPath}_${idx}`,
+        values: embeddingsArrays[idx],
+        metadata: {
+          ...chunk.metadata,
+          loc: JSON.stringify(chunk.metadata.loc),
+          pageContent: chunk.pageContent,
+          txtPath: txtPath,
+        },
+      };
+      batch.push(vector);
+
       if (batch.length === batchSize || idx === chunks.length - 1) {
         try {  await index.upsert({ upsertRequest: { vectors: batch, }, }); } 
         catch (error) { console.log(error);  }
@@ -428,6 +440,8 @@ The first step is to retrieve the Pinecone index using the [client.Index](https:
       }
     }
     ```
+    Where  `const txtPath = doc.metadata.source` is the path to the document in the file system.
+
 
 The [Index.upsert](https://docs.pinecone.io/docs/node-client#indexupsert)`(requestParameters: UpsertOperationRequest)` method is used to write vectors into a namespace. If a new value is upserted for an existing vector ID, it will overwrite the previous value. It returns an `int64` containing the number of vectors upserted. Here is an example of usage:
 
