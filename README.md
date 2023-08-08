@@ -420,7 +420,7 @@ The first step is to retrieve the Pinecone index using the [client.Index](https:
     }
     ```
 
-The loop code is shown below:
+The loop full code is shown below:
 
 ```js
   const batchSize = 100;
