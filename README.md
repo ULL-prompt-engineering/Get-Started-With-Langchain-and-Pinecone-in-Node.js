@@ -383,28 +383,14 @@ import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 The other class we import is the [RecursiveCharacterTextSplitter](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/lesson5/README.md#textsplitter) which is described in 
 [Lesson 5: TextSplitters](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/lesson5/README.md#textsplitter).
 
-The module exports a function `updatePinecone` that is called `await updatePinecone(client, indexName, docs)` with the Pinecone client, the name of the Pinecone index and an array of documents to be inserted in the index.
+The module exports a function `updatePinecone` that is called `await updatePinecone(client, indexName, docs)` with the Pinecone client, the name of the Pinecone index and the array of documents that were loaded by the `DirectoryLoader`.
 
 
 ```js
-// 2. Export updatePinecone function
 export const updatePinecone = async (client, indexName, docs) => {
-  console.log("Retrieving Pinecone index...");
-
-  // 3. Retrieve Pinecone index
   const index = client.Index(indexName);
-  // 4. Log the retrieved index name
-  console.log(`Pinecone index retrieved: ${indexName}`);
-
-  // 5. Process each document in the docs array
   for (const doc of docs) {
-    // 6. Create RecursiveCharacterTextSplitter instance
-    // 7. Split text into chunks (documents)
-    // 8. Create OpenAI embeddings for documents
-    // 9. Create and upsert vectors in batches of 100
-    }
-    // 10. Log the number of vectors updated
-    console.log(`Pinecone index updated with ${chunks.length} vectors`);
+    // Process each document in the docs array ...
   }
 };
 ```
