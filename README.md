@@ -395,92 +395,80 @@ export const updatePinecone = async (client, indexName, docs) => {
 };
 ```
 
-The first step is to retrieve the Pinecone index using the [client.Index](https://docs.pinecone.io/docs/node-client#index) method.
+The first step is to retrieve the Pinecone index using the [client.Index](https://docs.pinecone.io/docs/node-client#index) method. Then for each document in the `docs` array we 
 
-
+1. Create `RecursiveCharacterTextSplitter` instance
+2. Split text into chunks (documents)
+3. Create OpenAI embeddings for documents
+4. Create and upsert vectors in batches of 100. When the batch is full or it's the last item, upsert the vectors and empty the batch
+5. Log the number of vectors updated
 
 ```js
-// 2. Export updatePinecone function
-export const updatePinecone = async (client, indexName, docs) => {
-  console.log("Retrieving Pinecone index...");
-
-  // 3. Retrieve Pinecone index
-  const index = client.Index(indexName);
-  // 4. Log the retrieved index name
-  console.log(`Pinecone index retrieved: ${indexName}`);
-
-  // 5. Process each document in the docs array
+  const batchSize = 100;
+  const textSplitter = new RecursiveCharacterTextSplitter({
+    chunkSize: 1000,
+  });
   for (const doc of docs) {
-    console.log(`Processing document: ${doc.metadata.source}`);
     const txtPath = doc.metadata.source;
     const text = doc.pageContent;
+  
 
-    // 6. Create RecursiveCharacterTextSplitter instance
-    const textSplitter = new RecursiveCharacterTextSplitter({
-      chunkSize: 1000,
-    });
-    console.log("Splitting text into chunks...");
-    // 7. Split text into chunks (documents)
     const chunks = await textSplitter.createDocuments([text]);
-    console.log(`Text split into ${chunks.length} chunks`);
-    console.log(
-      `Calling OpenAI's Embedding endpoint documents with ${chunks.length} text chunks ...`
-    );
-
-    // 8. Create OpenAI embeddings for documents
+    console.log("Splitting text into chunks...");
     const embeddingsArrays = await new OpenAIEmbeddings().embedDocuments(
       chunks.map((chunk) => chunk.pageContent.replace(/\n/g, " "))
     );
-    console.log("Finished embedding documents");
-    console.log(
-      `Creating ${chunks.length} vectors array with id, values, and metadata...`
-    );
 
-    // 9. Create and upsert vectors in batches of 100
-    const batchSize = 100;
+    // Create and upsert vectors in batches of 100
     let batch = [];
     for (let idx = 0; idx < chunks.length; idx++) {
-      const chunk = chunks[idx];
-      const vector = {
-        id: `${txtPath}_${idx}`,
-        values: embeddingsArrays[idx],
-        metadata: {
-          ...chunk.metadata,
-          loc: JSON.stringify(chunk.metadata.loc),
-          pageContent: chunk.pageContent,
-          txtPath: txtPath,
-        },
-      };
-      batch.push(vector);
-      // When batch is full or it's the last item, upsert the vectors
+      // ... When batch is full or it's the last item, upsert the vectors and empty the batch
       if (batch.length === batchSize || idx === chunks.length - 1) {
-        /*
-        await index.upsert({
-          upsertRequest: {
-            vectors: batch,
-          },
-        });
-        */
-
         try {
-          const upsertResponse = await index.upsert({ 
-            upsertRequest: { vectors: batch, }, 
-          });  
-          console.log(`Upserted ${upsertResponse.upsertCount} vectors`);
-        } catch (error) {
-          console.log(error);
-        }
-
-
-        // Empty the batch
+          const upsertResponse = await index.upsert({ upsertRequest: { vectors: batch, }, });
+        } catch (error) { console.log(error);  }
         batch = [];
       }
     }
-    // 10. Log the number of vectors updated
-    console.log(`Pinecone index updated with ${chunks.length} vectors`);
   }
-};
 ```
+
+The [Index.upsert](https://docs.pinecone.io/docs/node-client#indexupsert)`(requestParameters: UpsertOperationRequest)` method is used to write vectors into a namespace. If a new value is upserted for an existing vector ID, it will overwrite the previous value. It returns an `int64` containing the number of vectors upserted. Here is an example of usage:
+
+``` js
+const upsertResponse = await index.upsert({
+  upsertRequest: {
+    vectors: [
+      {
+        id: "vec1",
+        values: [0.1, 0.2, 0.3, 0.4],
+        metadata: {
+          genre: "drama",
+        },
+      },
+      {
+        id: "vec2",
+        values: [0.1, 0.2, 0.3, 0.4],
+        metadata: {
+          genre: "comedy",
+        },
+      },
+    ],
+    namespace: "example-namespace",
+  },
+});
+```
+Max vector dimensionality is 20,000. Max size for an upsert request is 2MB. Recommended upsert limit is 100 vectors per request.
+Vectors may not be visible to queries immediately after upserting.
+
+
+``` js
+const upsertResponse = await index.upsert({ 
+  upsertRequest: { vectors: batch, }, 
+});  
+```
+
+The `upsert` method returns a `upsertResponse` object with a `upsertCount` property that indicates the number of vectors that were upserted.
 
 ## Execution
 

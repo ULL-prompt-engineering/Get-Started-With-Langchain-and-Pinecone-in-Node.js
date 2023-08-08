@@ -11,16 +11,18 @@ export const updatePinecone = async (client, indexName, docs) => {
   // 4. Log the retrieved index name
   console.log(`Pinecone index retrieved: ${indexName}`);
 
+  // 6. Create RecursiveCharacterTextSplitter instance
+  const textSplitter = new RecursiveCharacterTextSplitter({
+    chunkSize: 1000,
+  });
+  const batchSize = 100;
+
   // 5. Process each document in the docs array
   for (const doc of docs) {
     console.log(`Processing document: ${doc.metadata.source}`);
     const txtPath = doc.metadata.source;
     const text = doc.pageContent;
 
-    // 6. Create RecursiveCharacterTextSplitter instance
-    const textSplitter = new RecursiveCharacterTextSplitter({
-      chunkSize: 1000,
-    });
     console.log("Splitting text into chunks...");
     // 7. Split text into chunks (documents)
     const chunks = await textSplitter.createDocuments([text]);
@@ -39,7 +41,6 @@ export const updatePinecone = async (client, indexName, docs) => {
     );
 
     // 9. Create and upsert vectors in batches of 100
-    const batchSize = 100;
     let batch = [];
     for (let idx = 0; idx < chunks.length; idx++) {
       const chunk = chunks[idx];
@@ -65,10 +66,10 @@ export const updatePinecone = async (client, indexName, docs) => {
         */
 
         try {
-          const upsertResponse = await index.upsert({ 
-            upsertRequest: { vectors: batch, }, 
-          });  
-          console.log(`Upserted ${upsertResponse.upsertCount} vectors`);
+          const upsertResponse = await index.upsert({
+            upsertRequest: { vectors: batch, },
+          });
+          console.log(`Upserted ${upsertResponse} vectors`);
         } catch (error) {
           console.log(error);
         }

@@ -1,3 +1,5 @@
+import deb from "./deb.mjs";
+
 export const createPineconeIndex = async (client, indexName, vectorDimension) => {
   // 1. Initiate index existence check
   console.log(`Checking "${indexName}"...`);
@@ -17,7 +19,7 @@ export const createPineconeIndex = async (client, indexName, vectorDimension) =>
       },
     });
     // 6. Log successful creation
-    console.log(`Created with client:`, createClient);
+    console.log(`Created with client:`, deb(createClient));
     
     // 7. Wait 60 seconds for index initialization
     await new Promise((resolve) => setTimeout(resolve, 60000));
