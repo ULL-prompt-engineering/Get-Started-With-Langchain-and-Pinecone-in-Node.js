@@ -398,7 +398,17 @@ export const updatePinecone = async (client, indexName, docs) => {
 The first step is to retrieve the Pinecone index using the [client.Index](https://docs.pinecone.io/docs/node-client#index) method. Then for each document in the `docs` array we 
 
 1. Create `RecursiveCharacterTextSplitter` instance
-2. Split text into chunks (documents) `const chunks = await textSplitter.createDocuments([text]);`
+
+  ```js 
+  const textSplitter = new RecursiveCharacterTextSplitter({
+    chunkSize: 1000,
+  });
+  ```
+2. Split text into chunks (documents) 
+  ```js 
+  const text = doc.pageContent;
+  const chunks = await textSplitter.createDocuments([text]);
+  ```
 3. Create OpenAI embeddings for documents 
    
    ```js 
