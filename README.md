@@ -531,6 +531,8 @@ const result = await chain.call({
     question: question,
 });
 ```
+where `queryResponse.matches` is the list of matches returned by the Pinecone query for `question`.
+That  is, we ask the model to answer the `question` based on the concatenated page content **of the matched documents**.
 
 After the import we define and  export the `queryPineconeVectorStoreAndQueryLLM` function which has the following structure:
 
