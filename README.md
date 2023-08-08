@@ -532,7 +532,6 @@ export const queryPineconeVectorStoreAndQueryLLM = async (client, indexName,  qu
   // 6. Query Pinecone index and return top 10 matches
   // 7. Log the number of matches 
   // 8. Log the question being asked
-  console.log(`Asking question: ${question}...`);
   if (queryResponse.matches.length) {
     // 9. Create an OpenAI instance and load the QAStuffChain
     // 10. Extract and concatenate page content from matched documents
