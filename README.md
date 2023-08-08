@@ -508,7 +508,7 @@ import { loadQAStuffChain } from "langchain/chains";
 import { Document } from "langchain/document";
 ```
 
-The `loadQAStuffChain` is a function that is  used to load the []"stuff documents" chain](https://js.langchain.com/docs/modules/chains/document/stuff), which is a document chain that 
+The `loadQAStuffChain` is a function that is  used to load the ["stuff documents" chain](https://js.langchain.com/docs/modules/chains/document/stuff), which is a document chain that 
 1. takes a list of documents, 
 2. inserts them into a prompt, and 
 3. passes that prompt to an LLM (Language Model). 
