@@ -349,6 +349,7 @@ The following table describes the parameters of the `createIndex` method:
 | `metadata_config` | object | (Optional) Configuration for the behavior of Pinecone's internal metadata index. By default, all metadata is indexed; when metadata_config is present, only specified metadata fields are indexed. To specify metadata fields to index, provide a JSON object of the following form: `{"indexed": ["example_metadata_field"]}` |
 | `source_collection` | str | (Optional) The name of the collection to create an index from.                                                                                                                                                                                                                                                                                                |
 
+In our case we create an index with the name `indexName` and the vector dimension `vectorDimension` and the metric `cosine`:
 
 ```js
 export const createPineconeIndex = async (client, indexName, vectorDimension) => {
