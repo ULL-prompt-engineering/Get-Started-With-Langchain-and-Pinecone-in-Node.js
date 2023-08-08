@@ -497,13 +497,42 @@ You can see that `batch` is an array of vectors. Each vector has an `id`, `value
 
 ## 3-queryPineconeAndQueryGPT.js
 
+The module [3-queryPineconeAndQueryGPT.js](-queryPineconeAndQueryGPT.js) exports the function `queryPineconeAndQueryGPT` that is called `await queryPineconeVectorStoreAndQueryLLM(client, indexName, question)` with the Pinecone client, the name of the Pinecone index and the question to be answered.
+
+We start importing the required modules:
+
 ``` js
-// 1. Import required modules
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { OpenAI } from "langchain/llms/openai";
 import { loadQAStuffChain } from "langchain/chains";
 import { Document } from "langchain/document";
-// 2. Export the queryPineconeVectorStoreAndQueryLLM function
+```
+
+Then we define and  export the `queryPineconeVectorStoreAndQueryLLM` function:
+
+```js
+export const queryPineconeVectorStoreAndQueryLLM = async (client, indexName,  question) => {
+  // 3. Start query process
+  // 4. Retrieve the Pinecone index
+  // 5. Create query embedding
+  // 6. Query Pinecone index and return top 10 matches
+  // 7. Log the number of matches 
+  // 8. Log the question being asked
+  console.log(`Asking question: ${question}...`);
+  if (queryResponse.matches.length) {
+    // 9. Create an OpenAI instance and load the QAStuffChain
+    // 10. Extract and concatenate page content from matched documents
+    // 11. Execute the chain with input documents and question
+    // 12. Log the answer
+  } else {
+    // 13. Log that there are no matches, so GPT-3 will not be queried
+  }
+};
+```
+
+Here is the full code:
+
+```js
 export const queryPineconeVectorStoreAndQueryLLM = async (
   client,
   indexName,
