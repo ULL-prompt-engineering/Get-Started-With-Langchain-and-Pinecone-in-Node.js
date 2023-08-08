@@ -508,6 +508,15 @@ import { loadQAStuffChain } from "langchain/chains";
 import { Document } from "langchain/document";
 ```
 
+The `loadQAStuffChain` is a function that is  used to load the []"stuff documents" chain](https://js.langchain.com/docs/modules/chains/document/stuff), which is a document chain that 
+1. takes a list of documents, 
+2. inserts them into a prompt, and 
+3. passes that prompt to an LLM (Language Model). 
+
+![/images/stuff-chain.jpeg](/images/stuff-chain.jpeg)
+
+This chain is designed for applications where the documents are small and only a few are passed in for most calls.
+
 Then we define and  export the `queryPineconeVectorStoreAndQueryLLM` function:
 
 ```js
