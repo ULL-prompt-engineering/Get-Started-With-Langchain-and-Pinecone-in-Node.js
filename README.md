@@ -544,7 +544,38 @@ export const queryPineconeVectorStoreAndQueryLLM = async (client, indexName,  qu
 };
 ```
 
-Here is the full code:
+The `embedQuery` method of the [OpenAIEmbeddings](https://js.langchain.com/docs/api/embeddings/classes/openaiembeddings) class is used to embed a query. It takes a string as input and returns an array of numbers. Here is how we use it to embed the `question`:
+
+``` js
+  const queryEmbedding = await new OpenAIEmbeddings().embedQuery(question);
+```
+
+The [query](https://docs.pinecone.io/docs/node-client#indexquery) method of a Pinecone `Index` object 
+searches a namespace using a query vector. Retrieves the ids of the most similar items in a namespace, along with their similarity scores.
+
+```js 
+  let queryResponse = await index.query({
+    queryRequest: {
+      topK: 10,
+      vector: queryEmbedding,
+      includeMetadata: true,
+      includeValues: true,
+    },
+  });
+  ```
+Here are the attributes of the `queryRequest` field:
+<table>
+<thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code  data-lang="" name="" tabindex="0">namespace</code></td><td>string</td><td>(Optional) The namespace to query.</td></tr>
+<tr><td><code  data-lang="" name="" tabindex="0">topK</code></td><td>number</td><td>The number of results to return for each query.</td></tr>
+<tr><td><code  data-lang="" name="" tabindex="0">filter</code></td><td>object</td><td>(Optional) The filter to apply. You can use vector metadata to limit your search. See <a target="_self" href="https://www.pinecone.io/docs/metadata-filtering/">https://www.pinecone.io/docs/metadata-filtering/</a>.</td></tr><tr><td><code  data-lang="" name="" tabindex="0">includeValues</code></td><td>boolean</td><td>(Optional) Indicates whether vector values are included in the response. Defaults to <code  data-lang="" name="" tabindex="0">false</code>.</td></tr><tr><td><code  data-lang="" name="" tabindex="0">includeMetadata</code></td><td>boolean</td><td>(Optional) Indicates whether metadata is included in the response as well as the ids. Defaults to <code  data-lang="" name="" tabindex="0">false</code>.</td></tr>
+<tr><td><code  data-lang="" name="" tabindex="0">vector</code></td><td>Array</td><td>(Optional) The query vector. This should be the same length as the dimension of the index being queried. Each <code  data-lang="" name="" tabindex="0">query()</code> request can contain only one of the parameters <code  data-lang="" name="" tabindex="0">id</code> or <code  data-lang="" name="" tabindex="0">vector</code>.</td></tr>
+<tr><td><code  data-lang="" name="" tabindex="0">id</code></td><td>string</td><td>(Optional) The unique ID of the vector to be used as a query vector. Each <code  data-lang="" name="" tabindex="0">query()</code> request can contain only one of the parameters <code  data-lang="" name="" tabindex="0">vector</code> or <code  data-lang="" name="" tabindex="0">id</code>.</td></tr></tbody>
+</table>
+
+The `queryResponse` object has an attribute `matches` that is an array of objects. Each object has attributes as `id`, `score`, `metadata` and `values`. 
+
+Here is the full code of [3-queryPineconeAndQueryGPT.js](3-queryPineconeAndQueryGPT.js):
 
 ```js
 export const queryPineconeVectorStoreAndQueryLLM = async (
