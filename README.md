@@ -600,7 +600,6 @@ export const queryPineconeVectorStoreAndQueryLLM = async (
   });
 // 7. Log the number of matches 
 // 8. Log the question being asked
-  console.log(`Asking question: ${question}...`);
   if (queryResponse.matches.length) {
 // 9. Create an OpenAI instance and load the QAStuffChain
     const llm = new OpenAI({});
