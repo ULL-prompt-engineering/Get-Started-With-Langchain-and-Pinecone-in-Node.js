@@ -333,10 +333,9 @@ export const createPineconeIndex = async (client, indexName, vectorDimension) =>
 
 ## 2-updatePinecone.js
 
-![/images/myknowledgetovectordatabase.jpeg](/images/myknowledgetovectordatabase.jpeg)
+![/images/myknowledgetovectordb.png](/images/myknowledgetovectordb.png)
 
 
-```js
 ```js
 // 1. Import required modules
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
