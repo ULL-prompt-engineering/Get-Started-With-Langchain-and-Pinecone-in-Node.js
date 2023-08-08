@@ -301,7 +301,10 @@ We then  run the  `async` function containing the main code that takes three ste
 
 
 The function `createPineconeIndex`  is called with the Pinecone client, the name of the Pinecone index and the vector dimension 
- `await createPineconeIndex(client, indexName, vectorDimension)` and checks if the index exists and creates it if necessary.
+```js
+await createPineconeIndex(client, indexName, vectorDimension)
+``` 
+and checks if the index exists and creates it if necessary.
 
 To check for the existence we get list of existing indexes using [client.listIndexes()](https://docs.pinecone.io/docs/node-client#listindexes) that returns an array of strings with the names of the indexes in our project.
  
