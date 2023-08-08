@@ -477,6 +477,22 @@ const upsertResponse = await index.upsert({
   upsertRequest: { vectors: batch, }, 
 });  
 ```
+You can see that `batch` is an array of vectors. Each vector has an `id`, `values` and `metadata` properties that were initialized in the previous code snippet:
+
+``` js
+      const chunk = chunks[idx];
+      const vector = {
+        id: `${txtPath}_${idx}`,
+        values: embeddingsArrays[idx], // That was created by the OpenAIEmbeddings().embedDocuments method
+        metadata: {
+          ...chunk.metadata,
+          loc: JSON.stringify(chunk.metadata.loc),
+          pageContent: chunk.pageContent,
+          txtPath: txtPath,
+        },
+      };
+      batch.push(vector);
+```
 
 The `upsert` method returns a `upsertResponse` object with a `upsertCount` property that indicates the number of vectors that were upserted.
 
