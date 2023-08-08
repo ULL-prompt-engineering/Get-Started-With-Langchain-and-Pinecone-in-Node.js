@@ -300,7 +300,7 @@ We then  run the  `async` function containing the main code that takes three ste
 ## 1-createPineconeIndex.js
 
 
-The function `createPineconeIndex`  is called with the Pinecone client, the name of the Pinecone index and the vector dimension 
+The module [1-createPinecone.js](1-createPinecone.js) exports the function `createPineconeIndex`, which  is called in [0-main.js](0-main.js) with the Pinecone client, the name of the Pinecone index and the vector dimension as parameters.
 ```js
 await createPineconeIndex(client, indexName, vectorDimension)
 ``` 
