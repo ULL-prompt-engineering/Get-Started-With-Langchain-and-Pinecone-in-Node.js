@@ -372,7 +372,7 @@ export const createPineconeIndex = async (client, indexName, vectorDimension) =>
 
 ## 2-updatePinecone.js
 
-We start by importing the [OpenAIEmbeddings](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/lesson5/README.md#embeddings) class from `langchain/embeddings/openai`.
+The module [2-updatePinecone.js](2-updatePinecone.js) starts by importing the [OpenAIEmbeddings](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/lesson5/README.md#embeddings) class from `langchain/embeddings/openai`.
 See [lesson 5: embeddings](https://github.com/ULL-prompt-engineering/prompt-engineering-101/blob/main/lesson5/README.md#embeddings).
 
 ```js
