@@ -395,7 +395,7 @@ export const updatePinecone = async (client, indexName, docs) => {
 };
 ```
 
-The first stpe is to retrieve the Pinecone index using the [client.Index](https://docs.pinecone.io/docs/node-client#index) method.
+The first step is to retrieve the Pinecone index using the [client.Index](https://docs.pinecone.io/docs/node-client#index) method.
 
 
 
