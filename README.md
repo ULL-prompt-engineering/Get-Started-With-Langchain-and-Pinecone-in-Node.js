@@ -494,7 +494,6 @@ You can see that `batch` is an array of vectors. Each vector has an `id`, `value
       batch.push(vector);
 ```
 
-The `upsert` method returns a `upsertResponse` object with a `upsertCount` property that indicates the number of vectors that were upserted.
 
 ## Execution
 
